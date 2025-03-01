@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="video.css" />
+    <script
+      src="https://kit.fontawesome.com/ed674aa178.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <header>
+
+            <div class="logo-container">
+                <div class="hamburger" onclick="handleSidebar()">
+                    <i class="fa-solid fa-bars" style="color: #ffffff; font-size: 1.1rem;"></i>
+                </div>
+                <a href="index.html">
+                    <div class="yt-logo">
+                        <span style="display: flex; justify-content: center; align-items: center; gap: 2px;">
+                            <i class="fa-brands fa-youtube" style="color: #ff0000; font-size:1.7rem;"></i>
+                            <p class="yt-text">YouTube</p>
+                        </span>
+        
+                    </div>
+                </a>
+    
+            </div>
+    
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" name="search-text" onchange="handleSearch(event)" class="searchInput" placeholder="Search"/>
+                    <button class="search-but"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                </div>
+                <button class="mic"><i class="fa-solid fa-microphone" style="color: #ffffff;"></i></button>
+            </div>
+    
+    
+            <div class="profile-container">
+                <button class="create">
+                    <i class="fa-solid fa-plus" style="font-size: 1rem;"></i>
+                    <p class="create-btn-text">Create</p>
+                </button>
+    
+                <i class="fa-solid fa-bell" style="font-size: 1.3rem;"></i>
+    
+                <img src="prfile.png" alt="" class="prfl-img">
+    
+            </div>
+          
+        </header>
+
+        <aside>
+            <div class="side-bar side-home">
+                <a href="index.html" class="side-href">
+                    <i class="fa-solid fa-house"></i>
+                <p class="side-text">Home</p>
+                </a>
+            </div>
+            <div class="side-bar">
+                <a href="" class="side-href">
+                    <i class="fas fa-film"></i>
+                <p class="side-text">Shorts</p>
+                </a>
+            </div>
+            <div class="side-bar">
+                <a href="history.html" class="side-href">
+                    <i class="fas fa-history"></i>
+                    <p class="side-text">History</p>
+                </a>
+               
+            </div>
+            <div class="side-bar">
+                <a href="" class="side-href">
+                    <i class="fa-solid fa-user"></i>
+                <p class="side-text">You</p>
+                </a>
+            </div>
+            
+        </aside>
+
+        <main>
+
+            <div class="video-frame">
+
+                <iframe width="100%" height="70%" src="" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <br>
+                    <br>
+                <h3 id="videoTitle"></h3>
+                <h4 id="author"></h4>
+
+                <div class="write-comment">
+                    <img src="prfile.png" alt="" height="50px" width="50px">
+                    <input type="text" class="comment-input" placeholder="Add a comment...">
+                    <button class="create cmmnt" onclick="addComment()">Add Commment</button>
+                </div>
+            </div>
+
+            <div class="comment-section">
+                    <h2 style="color: white;">Comments</h2>
+                    <div class="comments">
+
+                    </div>
+                    <button class="create clear" onclick="clearComments()">Clear All Comments</button>
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 
+    <script>
+       
+
+       
+
+    </script> -->
+    <script src="video.js"></script>
+</body>
+
+</html>

@@ -5725,17 +5725,22 @@ const dummyData=
 
       const root= document.querySelector('main');
       const showUI=(list) =>{
-        list.forEach((obj,idx) =>{
+        list.forEach((obj) =>{
             const newCard=document.createElement("div");
 
             newCard.addEventListener("click",()=>{
-                window.open(`./video.html?id=${obj.videoId}`,"_top");
+                // window.open(`./video.html?id=${obj.videoId}`,"_top");
+
+                localStorage.setItem("videoData", JSON.stringify(obj));
+                window.open("./video.html", "_top");
+
             })
             newCard.className="card";
             newCard.innerHTML=`
-                <img src='${obj.videoThumbnails[0].url}' width="100%")'>
-                <h6> ${obj.author} </h6>
+                <img src='${obj.videoThumbnails[0].url}' width="100%" height="200rem")'>
+                
                 <h4>${obj.title}</h4>
+                <h6> ${obj.author} </h6>
             `;
     
             root.appendChild(newCard);
@@ -5747,3 +5752,109 @@ const dummyData=
 // const handleHover = (e,idx) =>{ //wrong
 //     e.target.src= 'dummyData[idx].videoThumbnails[1]';
 // }
+
+let temp=true; //sidebar is shrinked
+const handleSidebar = ()=>{
+  if(temp==true){
+    const aside = document.querySelector("aside");
+    aside.style.alignItems = "start";
+    aside.style.width = "10rem";
+    const sidebar=document.querySelector(".container");
+    sidebar.style.gridTemplateColumns = "10rem auto";
+    const ab = document.querySelectorAll(".side-href");
+    ab.forEach((ele)=>{
+      ele.style.flexDirection = "row";
+      ele.style.gap="1.5rem";
+      ele.children[1].style.fontSize = "1rem"
+    })
+
+    temp=false;
+  }
+
+  else{
+
+    const aside = document.querySelector("aside");
+    aside.style.alignItems = "center";
+    aside.style.width = "4.6rem"
+    const sidebar=document.querySelector(".container");
+    sidebar.style.gridTemplateColumns = "4.5rem auto";
+    const ab = document.querySelectorAll(".side-href");
+    ab.forEach((ele)=>{
+      ele.style.flexDirection = "column";
+      ele.style.gap="7px";
+      ele.children[1].style.fontSize = "0.8rem"
+    })
+    temp=true;
+  }
+}
+
+
+
+//searchbar logic
+
+const getData = (text) =>{
+  const pr = fetch(`https://youtube138.p.rapidapi.com/search/?q=${text}&hl=en&gl=US`,{
+      headers:{
+                        "x-rapidapi-host": "youtube138.p.rapidapi.com",
+                        "x-rapidapi-key": "c41acd2df7msh1fbf8683dc3ca97p100364jsnc663771a7357",
+                  },
+  });
+  pr.then((res)=>{
+      const pr2 = res.json();
+      pr2.then((data)=>{
+          console.log(data);
+          showCards(data);
+      })
+  })
+}
+
+
+
+
+
+
+const showCards = (data) =>{
+  const root = document.getElementById("searchResult")
+  root.innerHTML=``;
+  root.style.visibility="visible"
+  const {contents} = data;
+  contents.forEach((ele,idx)=>{
+      // console.log(ele);
+      if(idx<=11){
+
+        let obj={};
+        obj.videoId = ele.video.videoId;
+        obj.author = ele.video.author.title;
+        obj.title = ele.video.title;
+        obj.description= ele.video.descriptionSnippet;
+        obj.videoThumbnails = ele.video.thumbnails;
+
+        const p = document.createElement('p');
+        p.addEventListener("click",()=>{
+          // window.open(`./video.html?id=${obj.videoId}`,"_top");
+
+          localStorage.setItem("videoData", JSON.stringify(obj));
+          window.open("./video.html", "_top");
+
+      })
+
+       
+        
+        p.innerText = ele.video.title;
+       
+        root.appendChild(p);
+      }
+      
+  })
+
+}
+
+let timeoutID=null;
+const handleSearch = (e)=>{
+    if(timeoutID){
+        clearTimeout(timeoutID);
+    }
+    timeoutID = setTimeout(()=>{
+        getData(e.target.value);
+    },1000);
+};
