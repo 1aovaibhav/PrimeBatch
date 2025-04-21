@@ -30,6 +30,20 @@ const handleClick = (e) => {
         <img src= "circle.png" height ="97%" width="97%">
         `   
     }
+    if(xarr.length == 3 || oarr.length == 3){
+        let temp    
+        if(xarr.length==3){
+            temp = xarr[0];
+            }
+            else{
+                temp = oarr[0];
+            }
+           
+          document.querySelector(`.c-${temp[0]}${temp[1]}`).children[0].style.opacity = "0.5"
+            
+            
+        
+      }
       if(xarr.length == 4 || oarr.length ==4){
         let temp    
         if(xarr.length==4){
